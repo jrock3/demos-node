@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch">
+    <title>Welcome to Glitch!</title>
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>API Example</h1>
+    </header>
+    <main>
+      <ul style="font-size: 12px; line-height: 1.4;">
+        <li>GET https://sour-toad-api.glitch.me/api/v1/stats/ – This will get the stats for all players</li>
+        <li>POST https://sour-toad-api.glitch.me/api/v1/stats – This will create the stats for a player</li>
+        <li>PUT https://sour-toad-api.glitch.me/api/v1/stats/101 – This will update the stats for player 101</li>
+        <li>DELETE https://sour-toad-api.glitch.me/api/v1/stats/101 – This will delete the stats for player 101</li>
+      </ul>
+      <form id="stats-form">
+        <label>
+          Player ID
+          <input name="id" type="text" maxlength="100" placeholder="input" required>
+        </label>
+        <label>
+          Name
+          <input name="name" type="text" maxlength="100" placeholder="input">
+        </label>
+        <label>
+          Points Scored
+          <input name="points" type="text" maxlength="100" placeholder="input">
+        </label>
+        <button id="view-stats">View Stats</button>
+        <button id="add-stat">Add Stat</button>
+        <button id="edit-stat">Edit Stat</button>
+        <button id="delete-stat">Delete Stat</button>
+      </form>
+      <section class="dreams">
+        <ul id="dreams">
+          <em></em>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
