@@ -1,2 +1,2 @@
-# hello-express
-A server that serves a webpage, its resources, and some data
+# node-team-api
+A simple API app built on Node and Express.
