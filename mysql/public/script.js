@@ -10,10 +10,13 @@ const fetchPath = '/api/v1/stats/';
 const handleFetch = (method) => {
   const userInfo = getUserInfo(),
         isIdRequired = method !== 'GET';
-  if (isIdRequired && !userInfo.id) throw new Error('Id is required');
-  const thisPath = method === 'PUT' || method === 'DELETE' ? fetchPath + userInfo.id : fetchPath;
+  if (isIdRequired && !userInfo.number) throw new Error('Id is required');
+  const thisPath = method === 'PUT' || method === 'DELETE' ? fetchPath + userInfo.number : fetchPath;
   fetch(thisPath, fetchOptions(method, userInfo))
-  .then(res => res.json())
+  .then(res => {
+    console.log(res, res.body);
+    return res.json();
+  })
   .then(stats => {
     console.log(stats, method);
     showStats(stats);
@@ -24,7 +27,9 @@ const handleFetch = (method) => {
 const fetchOptions = (method, userInfo) => {
   let options = {
     method,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json' 
+    },
   };
   if (method === 'PUT' || method === 'POST') options.body = JSON.stringify(userInfo);
   console.log('options', options);
@@ -32,20 +37,20 @@ const fetchOptions = (method, userInfo) => {
 };
 
 const getUserInfo = () => {
-  const id = statsForm.elements.id.value,
+  const number = statsForm.elements.number.value,
         name = statsForm.elements.name.value,
-        points_scored = statsForm.elements.points.value;
+        points = statsForm.elements.points.value;
   statsForm.reset();
-  return { id, name, points_scored };
+  return { number, name, points };
 };
 
 const showStats = (stats) => {
   // wipe old stats
   dreamsList.innerHTML = '';
   // add current stats
-  stats.forEach(stat => {
+  stats.forEach(({ id, number, name, points }) => {
     const newListItem = document.createElement("li");
-    newListItem.innerHTML = `<span>${stat.name}</span>, #${stat.id}, scored ${stat.points_scored} points`;
+    newListItem.innerHTML = `<span>${id}</span> <span>${name}</span>, #${number}, scored ${points} points`;
     dreamsList.appendChild(newListItem);
   });
 };

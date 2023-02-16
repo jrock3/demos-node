@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
-const fs = require('fs');
+const bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
 app.use(express.static("public"));
 
 let stats = [
